@@ -1,0 +1,19 @@
+{
+  "name": "madera-system",
+  "private": true,
+  "scripts": {
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "format": "npm run format:backend && npm run format:frontend",
+    "format:backend": "cd backend && npx prettier --check \"src/**/*.ts\"",
+    "format:frontend": "cd frontend && npx prettier --check \"src/**/*.{ts,tsx}\"",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.5"
+  }
+}
