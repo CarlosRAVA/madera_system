@@ -1,7 +1,15 @@
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({
+  adapter,
+});
 
 async function main() {
   console.log('🌱 Starting seed...');
@@ -24,7 +32,9 @@ async function main() {
   const adminPassword = process.env.ADMIN_PASSWORD ?? 'Admin1234!';
   const adminName = process.env.ADMIN_NAME ?? 'Administrador';
 
-  const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+  const existingAdmin = await prisma.user.findUnique({
+    where: { email: adminEmail },
+  });
   if (!existingAdmin) {
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
     const admin = await prisma.user.create({
@@ -43,9 +53,15 @@ async function main() {
 
   // 3. Categories — upsert by name
   const categoriesData = [
-    { name: 'Clásicos', description: 'Los leños rellenos de siempre, sin falla.' },
+    {
+      name: 'Clásicos',
+      description: 'Los leños rellenos de siempre, sin falla.',
+    },
     { name: 'Especiales', description: 'Combinaciones únicas de temporada.' },
-    { name: 'Bebidas', description: 'Refrescos y aguas para acompañar tu pedido.' },
+    {
+      name: 'Bebidas',
+      description: 'Refrescos y aguas para acompañar tu pedido.',
+    },
   ];
 
   const categories: Record<string, number> = {};
@@ -70,21 +86,24 @@ async function main() {
     },
     {
       name: 'Leño con Chorizo',
-      description: 'Tortilla de maíz rellena con chorizo, queso Oaxaca y epazote.',
+      description:
+        'Tortilla de maíz rellena con chorizo, queso Oaxaca y epazote.',
       price: 40.0,
       stock: 40,
       categoryName: 'Clásicos',
     },
     {
       name: 'Leño Especial de la Casa',
-      description: 'Combinación exclusiva del chef con ingredientes de temporada.',
+      description:
+        'Combinación exclusiva del chef con ingredientes de temporada.',
       price: 55.0,
       stock: 20,
       categoryName: 'Especiales',
     },
     {
       name: 'Leño Vegetariano',
-      description: 'Relleno de verduras salteadas, queso panela y chile poblano.',
+      description:
+        'Relleno de verduras salteadas, queso panela y chile poblano.',
       price: 45.0,
       stock: 30,
       categoryName: 'Especiales',
