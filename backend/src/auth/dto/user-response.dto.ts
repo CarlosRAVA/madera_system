@@ -15,3 +15,9 @@ export class AuthResponseDto {
   user!: UserResponseDto;
   accessToken!: string;
 }
+
+export class LoginResponseDto {
+  user!: UserResponseDto;
+  accessToken!: string;
+  refreshToken!: string;
+}

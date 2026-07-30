@@ -5,5 +5,5 @@ export class RefreshTokenDto {
   @ApiProperty({ description: 'Refresh token JWT' })
   @IsString()
   @IsNotEmpty()
-  refreshToken: string;
+  refreshToken!: string;
 }
