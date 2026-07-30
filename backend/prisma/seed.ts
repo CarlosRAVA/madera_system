@@ -20,7 +20,7 @@ async function main() {
     update: {},
     create: {
       businessName: 'Leños Rellenos',
-      whatsappNumber: process.env.WHATSAPP_NUMBER ?? '+520000000000',
+      phone: process.env.WHATSAPP_NUMBER ?? '+520000000000',
       isOpen: true,
       deliveryFee: 0,
     },
@@ -41,7 +41,7 @@ async function main() {
       data: {
         email: adminEmail,
         password: hashedPassword,
-        fullName: adminName,
+        name: adminName,
         role: 'ADMIN',
         isActive: true,
       },
@@ -135,7 +135,7 @@ async function main() {
           description: prod.description,
           price: prod.price,
           stock: prod.stock,
-          isActive: true,
+          available: true,
           categoryId: categories[prod.categoryName],
         },
       });
