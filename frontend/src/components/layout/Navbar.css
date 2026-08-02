@@ -1,0 +1,99 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f5a623;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.navbar__link:hover {
+  color: #fff;
+}
+
+.navbar__link--account {
+  color: #f5a623;
+}
+
+.navbar__auth {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: all 0.2s;
+}
+
+.navbar__btn--primary {
+  background: #f5a623;
+  color: #1a1a1a;
+}
+
+.navbar__btn--primary:hover {
+  background: #e0941a;
+}
+
+.navbar__btn--ghost {
+  background: transparent;
+  color: #ccc;
+  border: 1px solid #444;
+}
+
+.navbar__btn--ghost:hover {
+  border-color: #888;
+  color: #fff;
+}
+
+.navbar__btn--logout {
+  background: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.navbar__btn--logout:hover {
+  background: #e74c3c;
+  color: #fff;
+}
