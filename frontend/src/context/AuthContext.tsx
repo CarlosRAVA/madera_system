@@ -23,6 +23,7 @@ export interface RegisterPayload {
 interface AuthResponse {
   user: AuthUser;
   accessToken: string;
+  refreshToken?: string;
 }
 
 interface AuthContextValue {
@@ -30,6 +31,7 @@ interface AuthContextValue {
   accessToken: string | null;
   isAuthenticated: boolean;
   register: (payload: RegisterPayload) => Promise<void>;
+  login: (email: string, password: string) => Promise<AuthUser>;
   logout: () => void;
 }
 
@@ -68,6 +70,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     persistSession(data);
   };
 
+  const login = async (email: string, password: string) => {
+    const data = await apiFetch<AuthResponse>('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    });
+    persistSession(data);
+    return data.user;
+  };
+
   const logout = () => {
     setUser(null);
     setAccessToken(null);
@@ -81,6 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         accessToken,
         isAuthenticated: user !== null,
         register,
+        login,
         logout,
       }}
     >
