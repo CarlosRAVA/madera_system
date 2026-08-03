@@ -106,7 +106,6 @@ export class AuthService {
   }
 
   private toUserResponse(user: User): UserResponseDto {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, hashedRefreshToken, ...rest } = user;
     return rest;
   }
