@@ -1,3 +1,14 @@
+import { RouterProvider } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import { ErrorBoundary } from '@/app/ErrorBoundary';
+import { router } from '@/app/router';
+
+export function App() {
+  return (
+    <ErrorBoundary>
+      <Toaster theme="dark" position="top-center" richColors />
+      <RouterProvider router={router} />
+    </ErrorBoundary>
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import './App.css';
@@ -54,5 +65,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
