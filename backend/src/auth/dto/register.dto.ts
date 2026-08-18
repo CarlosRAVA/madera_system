@@ -1,36 +1,36 @@
 import {
   IsEmail,
   IsNotEmpty,
-  IsOptional,
   IsString,
   MinLength,
+  MaxLength,
+  IsOptional,
 } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class RegisterDto {
-  @IsString({ message: 'El nombre debe ser un texto' })
-  @IsNotEmpty({ message: 'El nombre es requerido' })
-  name!: string;
+  @ApiProperty({ example: 'usuario@ejemplo.com' })
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
-  @IsEmail({}, { message: 'El email no tiene un formato válido' })
-  @IsNotEmpty({ message: 'El email es requerido' })
-  email!: string;
+  @ApiProperty({ example: 'MiPassword123!' })
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(6)
+  @MaxLength(50)
+  password: string;
 
-  @IsString({ message: 'La contraseña debe ser un texto' })
-  @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
-  password!: string;
+  @ApiProperty({ example: 'Juan Pérez' })
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(100)
+  fullName: string;
 
+  @ApiPropertyOptional({ example: '+504 9999-9999' })
+  @IsString()
   @IsOptional()
-  @IsString({ message: 'El teléfono debe ser un texto' })
+  @MaxLength(20)
   phone?: string;
-
-  /**
-   * NOTA: el modelo User actual no tiene columna "address".
-   * Se acepta en el DTO para cumplir el contrato de la API,
-   * pero se ignora al momento de crear el usuario.
-   * Si en el futuro se agrega la columna (o un modelo Address),
-   * conectar acá.
-   */
-  @IsOptional()
-  @IsString({ message: 'La dirección debe ser un texto' })
-  address?: string;
 }
